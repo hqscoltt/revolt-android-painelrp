@@ -66,6 +66,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import chat.stoat.R
 import chat.stoat.api.StoatAPI
 import chat.stoat.composables.chat.displayNameInChannel
@@ -109,6 +111,7 @@ fun VoiceSheet(onDisconnect: () -> Unit) {
         val participants by rememberParticipants(room)
         val trackRefs by rememberTracks(passedRoom = room)
         val isDeafened = VoiceCallManager.isDeafened
+        var fullscreenTrackIndex by remember { mutableStateOf(-1) }
 
         val audioHandler = room.audioSwitchHandler
         var audioDevices by remember {
@@ -174,6 +177,7 @@ fun VoiceSheet(onDisconnect: () -> Unit) {
                                     .aspectRatio(16f / 9f)
                                     .clip(MaterialTheme.shapes.large)
                                     .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+                                    .clickable { fullscreenTrackIndex = index }
                             ) {
                                 VideoTrackView(
                                     trackReference = trackRef,
@@ -307,6 +311,31 @@ fun VoiceSheet(onDisconnect: () -> Unit) {
                                 }
                             }
                         }
+                    }
+                }
+            }
+
+            trackRefs.getOrNull(fullscreenTrackIndex)?.let { fullscreenTrack ->
+                Dialog(
+                    onDismissRequest = { fullscreenTrackIndex = -1 },
+                    properties = DialogProperties(
+                        usePlatformDefaultWidth = false,
+                        dismissOnBackPress = true,
+                        dismissOnClickOutside = true
+                    )
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colorScheme.surfaceContainerLowest)
+                            .clickable { fullscreenTrackIndex = -1 }
+                    ) {
+                        VideoTrackView(
+                            trackReference = fullscreenTrack,
+                            room = room,
+                            scaleType = ScaleType.FitInside,
+                            modifier = Modifier.fillMaxSize()
+                        )
                     }
                 }
             }
