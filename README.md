@@ -1,52 +1,36 @@
-<div align="center">
-    <h1>Stoat for Android</h1>
-    <p>Official <a href="https://stoat.chat">Stoat</a> Android app.</p>
-    <br/><br/>
-    <div>
-        <a href="https://play.google.com/store/apps/details?id=chat.revolt"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" width="200"></a>
-        <br/>
-    </div>
-    <small>Google Play is a trademark of Google LLC.</small>
-    <br/><br/><br/>
-</div>
+# Revolt Android - chat.painelrp.app.br
 
-## Description
+App Android (fork patchado do Stoat/Revolt) configurado para conectar
+automaticamente no servidor self-hosted **chat.painelrp.app.br**.
 
-The codebase includes the app itself, as well as an internal library for interacting with the Stoat
-API. The app is written in Kotlin, and wholly
-uses [Jetpack Compose](https://developer.android.com/jetpack/compose).
+## Baixar o APK
 
-## Stack
+**[Clique aqui para baixar o APK](https://github.com/hqscoltt/revolt-android-painelrp/releases/download/v1.0.0/app-debug.apk)**
 
-- [Kotlin](https://kotlinlang.org/)
-- [Jetpack Compose](https://developer.android.com/jetpack/compose)
-    - For some Material components, the View-based
-      [Material Components Android](https://github.com/material-components/material-components-android)
-      (MDC-Android) library is used.
-- [Ktor](https://ktor.io/)
-- [Dagger](https://dagger.dev/) with [Hilt](https://dagger.dev/hilt/)
+Ou, se o link acima não abrir direto pra você: va na aba
+**[Releases](https://github.com/hqscoltt/revolt-android-painelrp/releases/tag/v1.0.0)**
+deste repositorio e baixe o arquivo `app-debug.apk`.
 
-## Resources
+### Como instalar
 
-### Stoat for Android
+1. Baixe o `.apk` pelo link acima direto no celular (ou copie pro celular
+   depois de baixar no PC).
+2. Abra o arquivo baixado. O Android vai avisar que "apps de fontes
+   desconhecidas" estao bloqueados por padrao - toque em **Configuracoes** e
+   permita a instalacao para o navegador/app que voce usou pra baixar
+   (é normal, esse aviso aparece pra qualquer app que nao vem da Play Store).
+3. Instale normalmente e abra - ja vem conectado no `chat.painelrp.app.br`.
 
-- [Roadmap](https://op.revolt.wtf/projects/revolt-for-android/work_packages)
-- [Stoat for Android Technical Documentation](https://revoltchat.github.io/android/)
-- [Android-specific Contribution Guide](https://revoltchat.github.io/android/contributing/guidelines/)
-  &mdash;**read carefully before contributing!**
+## O que foi corrigido em relacao ao app oficial
 
-### Stoat
+- Todas as URLs de servidor (API, arquivos, proxy, websocket) apontam para
+  `chat.painelrp.app.br` em vez do servidor oficial.
+- Adicionado toque-para-tela-cheia na visualizacao de tela/video compartilhado
+  durante chamadas de voz.
 
-- [Stoat Project Board](https://github.com/revoltchat/revolt/discussions) (Submit feature requests
-  here)
-- [Stoat Development Server](https://app.revolt.chat/invite/API)
-- [Stoat Server](https://app.revolt.chat/invite/Testers)
-- [General Stoat Contribution Guide](https://developers.revolt.chat/contrib.html)
+## Nota
 
-## Quick Start
-
-Open the project in Android Studio. You can then run the app on an emulator or a physical device by
-running the `app` module.
-
-In-depth setup instructions can be found
-at [Setting up your Development Environment](https://revoltchat.github.io/android/contributing/setup/)
+Esta e uma build de desenvolvimento (`debug`), nao assinada com certificado
+de release da Play Store - por isso o aviso de "fonte desconhecida" ao
+instalar. Notificacoes push em segundo plano nao funcionam nesta build
+(usa um `google-services.json` de placeholder).
